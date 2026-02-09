@@ -10,12 +10,11 @@ let todos = [
 ];
 
 function addToDo(event) {
-  console.log("hi");
   event.preventDefault();
   let input = document.getElementById("todo-input");
   InputValue = input.value;
   if (InputValue === "") {
-    // window.alert("Please write your task");
+    window.alert("Please write your task");
     return;
   }
   todos.push({ id: todos.length + 1, title: InputValue });
