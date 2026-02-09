@@ -26,8 +26,12 @@ function showTodos() {
   let toDoList = document.getElementById("todo-list");
   toDoList.innerHTML = "";
   for (let i = 0; i < todos.length; i++) {
-    toDoList.innerHTML += `<li>${todos[i].title}</li>`;
+    toDoList.innerHTML += `<li>${todos[i].title}<button id="delete">❌</button></li>`;
   }
 }
 
 showTodos();
+
+function deleteToDo(){
+    
+}
