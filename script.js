@@ -14,7 +14,7 @@ function addToDo(event) {
   let input = document.getElementById("todo-input");
   InputValue = input.value;
   if (InputValue === "") {
-    window.alert("Please write your task");
+    window.alert("Please write a task");
     return;
   }
   todos.push({ id: todos.length + 1, title: InputValue });
@@ -26,12 +26,18 @@ function showTodos() {
   let toDoList = document.getElementById("todo-list");
   toDoList.innerHTML = "";
   for (let i = 0; i < todos.length; i++) {
-    toDoList.innerHTML += `<li>${todos[i].title}<button id="delete">❌</button></li>`;
+    toDoList.innerHTML += `<li>${todos[i].title}<button onclick="deleteToDos(${todos[i].id})">❌</button></li>`;
   }
 }
 
-showTodos();
-
-function deleteToDo(){
-    
+function deleteToDos(id) {
+  console.log("hi");
+  let filteredToDos = todos.filter(function (item) {
+    if (id != item.id) {
+      return item;
+    }
+  });
+  console.log(filteredToDos);
+  todos = filteredToDos;
+  showTodos();
 }
