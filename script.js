@@ -41,3 +41,6 @@ function deleteToDos(id) {
   todos = filteredToDos;
   showTodos();
 }
+showTodos();
+
+
