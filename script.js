@@ -42,10 +42,8 @@ function deleteToDos(id) {
   showTodos();
 }
 
-function updateToDos(){
+function updateToDos() {
   let updatedToDo = document.getElementById("updated-input");
 }
 
 showTodos();
-
-
