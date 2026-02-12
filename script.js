@@ -26,7 +26,7 @@ function showTodos() {
   let toDoList = document.getElementById("todo-list");
   toDoList.innerHTML = "";
   for (let i = 0; i < todos.length; i++) {
-    toDoList.innerHTML += `<li>${todos[i].title}<button onclick="deleteToDos(${todos[i].id})">❌</button></li>`;
+    toDoList.innerHTML += `<li>${todos[i].title}<button id="update-btn" onclick="updateToDos">✎</button><button onclick="deleteToDos(${todos[i].id})">❌</button></li>`;
   }
 }
 
@@ -41,6 +41,11 @@ function deleteToDos(id) {
   todos = filteredToDos;
   showTodos();
 }
+
+function updateToDos(){
+  let updatedToDo = document.getElementById("updated-input");
+}
+
 showTodos();
 
 
