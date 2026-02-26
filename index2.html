@@ -108,13 +108,16 @@
       let todos = [
         { id: 1, title: "first todo" }, //0
         { id: 2, title: "second todo" }, //1
-        { id: 3, title: "third one" },
+        {
+          id: 3,
+          title: "third one",
+        },
       ];
 
-      let isEditModeOn = false;
+      let isEditModeOn = false; //mediators between update and add functions
+      let todoBeingEdited = null;
 
       function addTodo(event) {
-        console.log("hi from add todo func");
         event.preventDefault();
         let input = document.getElementById("userTodoInput");
         let inputValue = input.value;
@@ -123,8 +126,29 @@
           return;
         }
 
-        todos.push({ id: todos.length + 1, title: inputValue });
-        input.value = "";
+        //[0,1,2]
+        //[first, second]
+
+        //edit case
+        if (isEditModeOn) {
+          for (let i = 0; i < todos.length; i++) {
+            if (todos[i].id === todoBeingEdited) {
+              todos[i].title = inputValue; //updation finished here
+            }
+          }
+
+          isEditModeOn = false;
+          todoBeingEdited = null;
+
+          let AddButton = document.getElementById("add-button");
+          AddButton.innerText = "Add";
+          input.value = "";
+        } else {
+          //add case
+          todos.push({ id: todos.length + 1, title: inputValue });
+          input.value = "";
+        }
+
         showTodos();
       }
 
@@ -162,9 +186,13 @@
         });
 
         let inputField = document.getElementById("userTodoInput");
-        inputField.value = clickedTodo.title;
+        inputField.value = clickedTodo.title; //setting the input field value with the todo clicked to update
 
-        
+        isEditModeOn = true;
+        todoBeingEdited = todoId;
+
+        let AddButton = document.getElementById("add-button");
+        AddButton.innerText = "Update";
       }
     </script>
   </body>
