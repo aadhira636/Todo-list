@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f4f6f8;
+      }
+
+      .todo-container {
+        width: 100%;
+        max-width: 400px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .todo-container h2 {
+        margin-bottom: 16px;
+        text-align: center;
+        color: #333;
+      }
+
+      .todo-input {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .todo-input input {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .todo-input input:focus {
+        border-color: #000dff;
+      }
+
+      .todo-input button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #003062;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .todo-input button:hover {
+        background: #007bff;
+      }
+
+      .todo-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .todo-list li {
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: #f1f3f5;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      button {
+        background-color: red;
+        cursor: pointer;
+        color: white;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body>
+    <div class="todo-container">
+      <h2>Todo App</h2>
+
+      <form class="todo-input" onsubmit="addTodo(event)">
+        <input id="userTodoInput" type="text" placeholder="Enter a task..." />
+        <button type="submit" id="add-button">Add</button>
+      </form>
+
+      <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+      let todos = [
+        { id: 1, title: "first todo" }, //0
+        { id: 2, title: "second todo" }, //1
+        { id: 3, title: "third one" },
+      ];
+
+      let isEditModeOn = false;
+
+      function addTodo(event) {
+        console.log("hi from add todo func");
+        event.preventDefault();
+        let input = document.getElementById("userTodoInput");
+        let inputValue = input.value;
+
+        if (inputValue === "") {
+          return;
+        }
+
+        todos.push({ id: todos.length + 1, title: inputValue });
+        input.value = "";
+        showTodos();
+      }
+
+      function showTodos() {
+        let todosList = document.getElementById("todo-list");
+        todosList.innerHTML = "";
+        for (let i = 0; i < todos.length; i++) {
+          todosList.innerHTML += `<li>
+        ${todos[i].title}
+        <button onclick="deleteTodo(${todos[i].id})" style="color: red; margin-left: 15px;">Delete</button>
+        <button onclick="UpdateTodo(${todos[i].id})" style="color: blue; margin-left: 15px;">Update</button>
+      </li>`;
+        }
+      }
+
+      showTodos();
+
+      function deleteTodo(idWhichNeedToBeDeleted) {
+        console.log("delete");
+        var filteredArray = todos.filter(function (currentItem) {
+          if (idWhichNeedToBeDeleted != currentItem.id) {
+            return currentItem;
+          }
+        });
+        console.log(filteredArray);
+        todos = filteredArray;
+        showTodos();
+      }
+
+      function UpdateTodo(todoId) {
+        let clickedTodo = todos.find(function (item) {
+          if (item.id === todoId) {
+            return item;
+          }
+        });
+
+        let inputField = document.getElementById("userTodoInput");
+        inputField.value = clickedTodo.title;
+
+        
+      }
+    </script>
+  </body>
+</html>
