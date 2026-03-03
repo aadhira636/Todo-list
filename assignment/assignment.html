@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div
+      class="w-[500px] h-[500px] bg-gray-200 flex item-centre justify-center ml-[450px] mt-[150px]"
+    >
+      <form onsubmit="signUp(event)">
+        <h1
+          class="text-2xl font-medium flex item-centre justify-center p-[60px]"
+        >
+          Sign Up Page
+        </h1>
+        <div class="flex-col item-centre p-[10px]">
+          <div class="flex items-center justify-center gap-10 mb-[30px]">
+            <label>Email</label>
+            <input
+              id="emailInput"
+              class="border-[2px]"
+              type="email"
+              placeholder="   Enter your Email"
+              required
+            />
+          </div>
+          <div class="flex items-center justify-center gap-3">
+            <label>Password</label>
+            <input
+              id="passwordInput"
+              class="border-[2px]"
+              type="password"
+              placeholder="   Enter your Password"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <p id="result"></p>
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="bg-white flex item-centre justify-center ml-[110px] mt-[20px] w-[100px] h-[30px]"
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
+    <script>
+      let oldUsers = [
+        { id: 1, gmail: "light@gmail.com", password: "light.123" },
+        { id: 2, gmail: "fire@gmail.com", password: "fire.123" },
+        { id: 3, gmail: "air@gmail.com", password: "air.123" },
+      ];
+
+      function signUp(event) {
+        event.preventDefault();
+        let email = document.getElementById("emailInput").value;
+        let newPassword = document.getElementById("passwordInput").value;
+        let message = document.getElementById("result");
+
+        // message.textContent = "Form submitted successfully!."
+
+        let existingMail = null;
+        for(let i=0; i<oldUsers.length; i++){
+            if(oldUsers[i].gmail === email){
+                message.textContent = "User already exists.";
+                return;
+            } else {
+                message.textContent = "Form submitted successfully.";
+
+                let newUser = {
+                id: oldUsers.length + 1,
+                gmail: email,
+                password: newPassword,
+                };
+
+                oldUsers.push(newUser);
+                console.log(oldUsers);
+            }
+        }
+        // let existingMail = oldUsers.find(function (user) {
+        //   if (user.gmail === email) {
+        //     message.textContent = "User already exists.";
+        //     return;
+        //   } else {
+        //     message.textContent = "Form submitted successfully.";
+
+        //     let newUser = {
+        //       id: oldUsers.length + 1,
+        //       gmail: email,
+        //       password: newPassword,
+        //     };
+
+        //     oldUsers.push(newUser);
+        //     console.log(oldUsers);
+        //   }
+        // });
+
+        // if (email === existingMail) {
+        //   message.textContent = "User already exists.";
+        // } else {
+        //   message.textContent = "Form submitted successfully.";
+        // }
+    }
+    </script>
+  </body>
+</html>
